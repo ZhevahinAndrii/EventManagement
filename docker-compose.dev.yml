@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    env_file:
+      - dev.env
+    volumes:
+      - dev_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - dev_network
+    
+  backend:
+    build:
+      context: .
+    ports:
+      - "80:8000"
+    depends_on:
+      - db
+    env_file:
+      - dev.env
+    volumes:
+      - .:/app
+    networks:
+      - dev_network
+
+
+volumes:
+  dev_db_data:
+
+networks:
+  dev_network:
+    driver: bridge
+    name: dev_network

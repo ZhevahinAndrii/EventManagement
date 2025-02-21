@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    env_file:
+      - prod.env
+    volumes:
+      - prod_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - prod_network
+    
+  backend:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - prod.env
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+    networks:
+      - prod_network
+
+  nginx:
+    image: nginx:latest
+    volumes:
+     - ./nginx.prod.conf:/etc/nginx/nginx.conf
+     - static_volume:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    env_file:
+      - prod.env
+    networks:
+      - prod_network
+
+volumes:
+  prod_db_data:
+  static_volume:
+networks:
+  prod_network:
+    driver: bridge
+    name: prod_network

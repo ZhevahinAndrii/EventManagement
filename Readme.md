@@ -1,12 +1,12 @@
 # EventManagement 🎉
 ## About the project
-**EventManagement** - REST API for events control, where users can register for them, get info about them, update, create and delete them also
+**EventManagement** - REST API for events control, where users can register for them, get info about them, update, create and delete them also.
 
 ---
 ## Local start (without Docker)
 
  - ### 1️⃣ Install the dependencies
-    Open cmd or terminal in working directory with the EventManagement project
+    Open cmd or terminal in working directory with the EventManagement project:
     ```sh 
     python -m venv venv
     source venv/bin/activate # for Linux/Maс
@@ -15,7 +15,7 @@
     ```
 
  - ### 2️⃣ Set your dev.env file
-    Create and go to your **dev.env** file and change your local settings for environment similar to **.env.sample** file (in local mode system takes your environment from **dev.env**)
+    Create and go to your **dev.env** file and change your local settings for environment similar to **.env.sample** file (in local mode system takes your environment from **dev.env**).
  - ### 3️⃣ Apply the migrations
     ```sh
     python manage.py migrate
@@ -31,12 +31,12 @@
 - ### 1️⃣ Set your needed .env file:
     - If you wanna use docker-compose.prod.yml, then create and go to the **prod.env** file and configure it similar to **.env.sample** file, else do the same thing but with your **dev.env** file.
 - ### 2️⃣ Docker start
-    - Now you can start Docker smth like
+    - Now you can start your Docker container like:
     ```sh
     docker-compose -f docker-compose.{dev/prod}.yml up --build -d
     ```
     - Docker automatically starts all the needed services, apply all unapplied migrations and collects statis if it works in a production mode.
-    - Docker also uses **NGinx** for **production mode**.
+    - Docker also uses **Nginx** for **production mode** (it works with static files, allowing to decrease main server load).
     - You can optionally create a superuser by using a command:
        ```sh
        docker-compose -f docker-compose.{dev/prod}.yml exec backend python manage.py createsuperuser
@@ -44,9 +44,9 @@
     - Server will be available at http://localhost:80 (or just http://localhost)
 
 ## 📝 API
-🔗 Swagger-документация
+🔗 Swagger-documentation
 ---
- - After project started, you can see the full documentation by url-route **/swagger** (http://127.0.0.1:8000/swagger for *local development* and http://localhost/swagger/ in Docker)
+ - After project started, you can see the full documentation by url-route **/swagger** (http://127.0.0.1:8000/swagger for *local development* and http://localhost/swagger/ in *Docker*)
 
 --- 
 ## Using this API, you can:
